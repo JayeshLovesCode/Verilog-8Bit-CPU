@@ -1,8 +1,15 @@
-'timescale 1ns / 1ps
+`timescale 1ns / 1ps
 module shifter_to_left_tb;
 reg [7:0] in_sim;
-wire [7:0] out_sim, carry_out_sim;
-shifter_to_left_tb dut(.in_bit(in_sim), .out_bit(out_sim), .carry_out(carry_out_sim));
+wire [7:0] out_sim;
+wire  carry_out_sim;
+Shifter_to_left dut(.in_bit(in_sim), .out_bit(out_sim), .carry_out(carry_out_sim));
+
+initial begin
+    $dumpfile("Shifter_to_left_TB.vcd");
+    $dumpvars(0, shifter_to_left_tb);
+end
+
 initial begin
     in_sim = 8'b 00000001;
     #10 in_sim = 8'b 10010101;
