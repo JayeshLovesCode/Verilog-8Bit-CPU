@@ -11,10 +11,10 @@ initial begin
 end
 
 initial begin
-    in_sim = 8'b 00000001;
-    #10 in_sim = 8'b 10010101;
-    #10 in_sim = 8'b 11111111;
-    #10 in_sim = 8'b 00000000;
+    in_sim = 8'b 10001000;
+    #10 in_sim = 8'b 11100000;
+    #10 in_sim = 8'b 11010111;
+    #10 in_sim = 8'b 01011110;
     #20 $finish;
 end
 initial begin
