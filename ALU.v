@@ -1,5 +1,5 @@
 // version  1.0.0 
-// last edited 2026-02-01 , 11:20 AM
+// last edited 2026-02-02 , 6:37 PM
 // last edited by Jayesh
 
 //Rough ALU Outline
@@ -7,36 +7,65 @@
 module ALU( 
     input [7:0] A, B,
     input [2:0] OP_Code,
-    output [7:0] Result,
-    output [3:0] NZCV
+    output reg [7:0] Result,
+    output reg [3:0] NZCV
 );
+    wire adder_sum;
+    wire adder_carry;
+    Adder adder_inst(.A(A), .B(B), .Carry_in(1'b0), .Sum(adder_sum), .Carry_out(adder_carry));
+
+    wire subtractor_diff;
+    wire subtractor_borrow;
+    Adder subtractor_inst(.A(A), .B(B), .Carry_in(1'b1), .Sum(subtractor_diff), .Carry_out(subtractor_borrow));
+
+    wire left_shifted_out;
+    Shifter_to_left shifter_inst(.in_bit(A), .out_bit(left_shifted_out));
+
+    wire right_shifted_out;
+    Shifter_to_right shifter_inst(.in_bit(A), .out_bit(right_shifted_out));
+
     always@(*) begin
         if (OP_Code == 3'b000) begin
-            Result = 8'b00000000; 
+            Result = adder_sum;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = adder_carry;
         end
         else if (OP_Code == 3'b001) begin
-            Result = 8'b00000000;
+            Result = subtractor_diff;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = subtractor_borrow;
         end
         else if (OP_Code == 3'b010) begin
-            Result = 8'b00000000;
+            Result = A & B;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
         end
         else if (OP_Code == 3'b011) begin
-            Result = 8'b00000000;
+            Result = A | B;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
         end
         else if (OP_Code == 3'b100) begin
-            Result = 8'b00000000; 
+            Result = A ^ B;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
         end
         else if (OP_Code == 3'b101) begin
-            Result = 8'b00000000;    
+            Result = left_shifted_out;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;   
         end
         else if (OP_Code == 3'b110) begin
-            Result = 8'b00000000;
+            Result = right_shifted_out;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
         end
         else if (OP_Code == 3'b111) begin
-            Result = 8'b00000000;
-        end
-        else begin
-            Result = 8'b00000000; 
+            Result = A;
+            NZCV[0] = Result[7];
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
         end
     end
 endmodule
