@@ -1,3 +1,6 @@
+// version  1.0.0 
+// last edited 2026-02-01 , 11:20 AM
+// last edited by Venoth
 module Shifter_to_right (
     input [7:0] in_bit,
     output [7:0] out_bit,
