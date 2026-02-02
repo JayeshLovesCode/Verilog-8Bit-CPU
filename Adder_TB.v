@@ -4,8 +4,8 @@ module Adder_TB;
     reg [7:0] A_sim, B_sim;
     reg Carry_in_sim;
     wire [7:0] Sum_sim;
-    wire Carry_out;
-    Adder dut(.A(A_sim), .B(B_sim), .Carry_in(Carry_in_sim), .Sum(Sum_sim), Carry_out(Carry_out_sim));
+    wire Carry_out_sim;
+    Adder dut(.A(A_sim), .B(B_sim), .Carry_in(Carry_in_sim), .Sum(Sum_sim), .Carry_out(Carry_out_sim));
 
     //Dumpfile and dumpvariable  for waveform generaotr
     initial begin
@@ -15,29 +15,29 @@ module Adder_TB;
 
     //Applying stimulus for generator 
     initial begin
-        A_sim = b'8 10110000
-        B_sim = b'8 01001000
-        Carry_in_sim = 0
+        A_sim = 8'b 10110000;
+        B_sim = 8'b 01001000;
+        Carry_in_sim = 0;
         #10 
-        A_sim = b'8 10001000
-        B_sim = b'8 11001000
-        Carry_in_sim = 0
+        A_sim = 8'b 10001000;
+        B_sim = 8'b 11001000;
+        Carry_in_sim = 0;
         #10 
-        A_sim = b'8 11110000
-        B_sim = b'8 11010000
-        Carry_in_sim = 0
+        A_sim = 8'b 11110000;
+        B_sim = 8'b 11010000;
+        Carry_in_sim = 0;
         #10 
-        A_sim = b'8 11000000
-        B_sim = b'8 00101000
-        Carry_in_sim = 1
+        A_sim = 8'b 11000000;
+        B_sim = 8'b 00101000;
+        Carry_in_sim = 1;
         #10 
-        A_sim = b'8 10010111
-        B_sim = b'8 11011000
-        Carry_in_sim = 1
+        A_sim = 8'b 10010111;
+        B_sim = 8'b 11011000;
+        Carry_in_sim = 1;
         #10 
-        A_sim = b'8 10101100
-        B_sim = b'8 11111010
-        Carry_in_sim = 1
+        A_sim = 8'b 10101100;
+        B_sim = 8'b 11111010;
+        Carry_in_sim = 1;
         #10 
         $finish;
     end
