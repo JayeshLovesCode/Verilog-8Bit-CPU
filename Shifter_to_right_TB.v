@@ -3,7 +3,7 @@ module Shifter_to_right_TB;
 reg [7:0] in_sim;
 wire [7:0] out_sim;
 wire  carry_out_sim;
-Shifter_to_left dut(.in_bit(in_sim), .out_bit(out_sim), .carry_out(carry_out_sim));
+Shifter_to_right dut(.in_bit(in_sim), .out_bit(out_sim), .carry_out(carry_out_sim));
 
 initial begin
     $dumpfile("Shifter_to_right_TB.vcd");
