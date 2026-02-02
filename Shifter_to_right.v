@@ -4,5 +4,5 @@ module Shifter_to_right (
     output carry_out
 );
     assign out_bit = in_bit >> 1;
-    assign carry_out = in_bit[7];
+    assign carry_out = in_bit[0];
 endmodule
