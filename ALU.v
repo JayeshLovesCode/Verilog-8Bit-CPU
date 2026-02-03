@@ -1,5 +1,5 @@
 // version  1.0.0 
-// last edited 2026-02-02 , 6:37 PM
+// last edited 2026-02-03 , 12:44 PM
 // last edited by Jayesh
 
 //Rough ALU Outline
@@ -19,10 +19,12 @@ module ALU(
     Adder subtractor_inst(.A(A), .B(B), .Carry_in(1'b1), .Sum(subtractor_diff), .Carry_out(subtractor_borrow));
 
     wire left_shifted_out;
-    Shifter_to_left shifter_inst(.in_bit(A), .out_bit(left_shifted_out));
+    wire carry_left_shift;
+    Shifter_to_left shifter_inst(.in_bit(A), .out_bit(left_shifted_out), .carry_out(carry_left_shift));
 
     wire right_shifted_out;
-    Shifter_to_right shifter_inst(.in_bit(A), .out_bit(right_shifted_out));
+    wire carry_right_shift;
+    Shifter_to_right shifter_inst(.in_bit(A), .out_bit(right_shifted_out), .carry_out(carry_right_shift));
 
     always@(*) begin
         if (OP_Code == 3'b000) begin
@@ -30,42 +32,66 @@ module ALU(
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
             NZCV[2] = adder_carry;
+            if ((adder_sum[7] != A[7]) && (A[7] == B[7])) begin
+                NZCV[3] = 1'b1;
+            end
+            else begin
+                NZCV[3] = 1'b0;
+            end
         end
         else if (OP_Code == 3'b001) begin
             Result = subtractor_diff;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
             NZCV[2] = subtractor_borrow;
+            if ((adder_sum[7] != A[7]) && (A[7] == B[7])) begin
+                NZCV[3] = 1'b1;
+            end
+            else begin
+                NZCV[3] = 1'b0;
+            end
         end
         else if (OP_Code == 3'b010) begin
             Result = A & B;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = 1'b0;
+            NZCV[3] = 1'b0;
         end
         else if (OP_Code == 3'b011) begin
             Result = A | B;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = 1'b0;
+            NZCV[3] = 1'b0;
         end
         else if (OP_Code == 3'b100) begin
             Result = A ^ B;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = 1'b0;
+            NZCV[3] = 1'b0;
         end
         else if (OP_Code == 3'b101) begin
             Result = left_shifted_out;
             NZCV[0] = Result[7];
-            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;   
+            NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = carry_left_shift;
+            NZCV[3] = 1'b0;
         end
         else if (OP_Code == 3'b110) begin
             Result = right_shifted_out;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = carry_right_shift;
+            NZCV[3] = 1'b0;
         end
         else if (OP_Code == 3'b111) begin
             Result = A;
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
+            NZCV[2] = 1'b0;
+            NZCV[3] = 1'b0;
         end
     end
 endmodule
