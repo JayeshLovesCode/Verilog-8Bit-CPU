@@ -10,21 +10,21 @@ module ALU(
     output reg [7:0] Result,
     output reg [3:0] NZCV
 );
-    wire adder_sum;
+    wire [7:0]adder_sum;
     wire adder_carry;
     Adder adder_inst(.A(A), .B(B), .Carry_in(1'b0), .Sum(adder_sum), .Carry_out(adder_carry));
 
-    wire subtractor_diff;
+    wire [7:0]subtractor_diff;
     wire subtractor_borrow;
-    Adder subtractor_inst(.A(A), .B(B), .Carry_in(1'b1), .Sum(subtractor_diff), .Carry_out(subtractor_borrow));
+    Adder subtractor_inst(.A(A), .B(~B), .Carry_in(1'b1), .Sum(subtractor_diff), .Carry_out(subtractor_borrow));
 
-    wire left_shifted_out;
+    wire [7:0]left_shifted_out;
     wire carry_left_shift;
-    Shifter_to_left shifter_inst(.in_bit(A), .out_bit(left_shifted_out), .carry_out(carry_left_shift));
+    Shifter_to_left shifter_left_inst(.in_bit(A), .out_bit(left_shifted_out), .carry_out(carry_left_shift));
 
-    wire right_shifted_out;
+    wire [7:0]right_shifted_out;
     wire carry_right_shift;
-    Shifter_to_right shifter_inst(.in_bit(A), .out_bit(right_shifted_out), .carry_out(carry_right_shift));
+    Shifter_to_right shifter_right_inst(.in_bit(A), .out_bit(right_shifted_out), .carry_out(carry_right_shift));
 
     always@(*) begin
         if (OP_Code == 3'b000) begin
@@ -44,7 +44,7 @@ module ALU(
             NZCV[0] = Result[7];
             NZCV[1] = (Result == 8'b00000000) ? 1'b1 : 1'b0;
             NZCV[2] = subtractor_borrow;
-            if ((adder_sum[7] != A[7]) && (A[7] == B[7])) begin
+            if ((subtractor_diff[7] != A[7]) && (A[7] != B[7])) begin
                 NZCV[3] = 1'b1;
             end
             else begin
