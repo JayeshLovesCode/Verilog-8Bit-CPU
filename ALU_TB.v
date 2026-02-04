@@ -1,5 +1,5 @@
 // version  1.0.0 
-// last edited 2026-02-02 , 9:01 PM
+// last edited 2026-02-03 , 11:24 PM
 // last edited by Venoth
 
 //Rough ALU Test Bench 
@@ -19,10 +19,54 @@ module ALU_TB;
 
     // Stimulus for generator 
     initial begin
-        //Test Case for 
+        //Test Case for 000
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 001
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 011
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 100
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 101
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 110
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 110
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
+        //Test Case for OP_Code 111
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 000;
+        #10
+
     end
 
     initial begin
