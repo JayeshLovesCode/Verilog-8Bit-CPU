@@ -1,8 +1,6 @@
 // version  1.0.0 
-// last edited 2026-02-03 , 12:44 PM
+// last edited 2026-02-04 , 10:22 PM
 // last edited by Jayesh
-
-//Rough ALU Outline
 
 module ALU( 
     input [7:0] A, B,
