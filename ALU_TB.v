@@ -191,16 +191,11 @@ module ALU_TB;
         OP_Code_sim = 111;
         #10
 
-
-
-        $finish
+        $finish;
 
     end
 
     initial begin
         $monitor($time, "A_sim = %b, B_sim = %b, OP_Code_sim = %b, Result_sim = %b, NZCV_sim = %b,", A_sim, B_sim, OP_Code_sim, Result_sim, NZCV_sim);
     end
-
-
-
 endmodule
