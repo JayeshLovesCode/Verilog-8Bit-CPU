@@ -19,60 +19,121 @@ module ALU_TB;
 
     // Stimulus for generator 
     initial begin
-        //Test Case for 000
+        //Test Case for 000 binary additon 
+
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 000;
         #10
-
+        //Testing Carry_out is 1?
         A_sim = 11100100;
         B_sim = 10100010;
         OP_Code_sim = 000;
         #10
-
+        //confirm Carr_out is zero 
         A_sim = 11100100;
         B_sim = 00000000;
         OP_Code_sim = 000;
         #10
-
-        A_sim = 00000000;
+        //confirm Carry_out is zero with addtion 
+        A_sim = 00001010;
         B_sim = 11100100;
         OP_Code_sim = 000;
         #10
 
+        //Test Case for OP_Code 001 binary subtraction 
 
-        //Test Case for OP_Code 001
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 001;
         #10
 
+        //Confirm Carr_out is zero
+        A_sim = 11111111;
+        B_sim = 00000000;
+        OP_Code_sim = 001;
+        #10
 
-        //Test Case for OP_Code 011
+        A_sim = 11010111;
+        B_sim = 10111010;
+        OP_Code_sim = 001;
+        #10
+
+        A_sim = 01101100;
+        B_sim = 10111010;
+        OP_Code_sim = 001;
+        #10
+
+        //Test Case for OP_Code 010 AND gate
+
+        //base case for all OP_Code
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 010;
+        #10
+        //Base Case for all gates
+        A_sim = 11111111;
+        B_sim = 00000000;
+        OP_Code_sim = 010;
+        #10
+
+        A_sim = 11100110;
+        B_sim = 00101100;
+        OP_Code_sim = 010;
+        #10
+
+
+
+        //Test Case for OP_Code 011 OR gate
+
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 011;
         #10
+        //Base Case for all gates
+        A_sim = 11111111;
+        B_sim = 00000000;
+        OP_Code_sim = 011;
+        #10
 
-        //Test Case for OP_Code 100
+        A_sim = 10111100;
+        B_sim = 00010010;
+        OP_Code_sim = 011;
+        #10
+
+        //Test Case for OP_Code 100 XOR gate
+
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 100;
         #10
-
-        //Test Case for OP_Code 101
-        A_sim = 00000000;
+        //Base Case for all gates
+        A_sim = 11111111;
         B_sim = 00000000;
-        OP_Code_sim = 101;
+        OP_Code_sim = 100;
         #10
 
+        A_sim = 00010100;
+        B_sim = 10111010;
+        OP_Code_sim = 100;
+        #10
+
+
         //Test Case for OP_Code 110
+
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 110;
         #10
 
         //Test Case for OP_Code 111
+
+        //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 111;
