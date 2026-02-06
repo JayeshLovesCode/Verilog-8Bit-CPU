@@ -123,7 +123,28 @@ module ALU_TB;
         #10
 
 
-        //Test Case for OP_Code 110
+        //Test Case for OP_Code 101 Shift A left
+
+        //base case for all OP_Code
+        A_sim = 00000000;
+        B_sim = 00000000;
+        OP_Code_sim = 101;
+        #10
+
+        //Carry_out as 1
+        A_sim = 10000100;
+        B_sim = 10101000;
+        OP_Code_sim = 101;
+        #10
+
+        //Carry_out as 0
+        A_sim = 01110101;
+        B_sim = 00101000;
+        OP_Code_sim = 101;
+        #10
+
+
+        //Test Case for OP_Code 110 shift A right
 
         //base case for all OP_Code
         A_sim = 00000000;
@@ -131,13 +152,46 @@ module ALU_TB;
         OP_Code_sim = 110;
         #10
 
-        //Test Case for OP_Code 111
+        //Carry_out as 1
+        A_sim = 01011101;
+        B_sim = 00101000;
+        OP_Code_sim = 110;
+        #10
+        //Carry_out as 0
+        A_sim = 01011100;
+        B_sim = 11100010;
+        OP_Code_sim = 110;
+        #10
+
+        //Test Case for OP_Code 111 shift A right
 
         //base case for all OP_Code
         A_sim = 00000000;
         B_sim = 00000000;
         OP_Code_sim = 111;
         #10
+
+        A_sim = 11111111;
+        B_sim = 11111111;
+        OP_Code_sim = 111;
+        #10
+
+        A_sim = 01010010;
+        B_sim = 10101000;
+        OP_Code_sim = 111;
+        #10
+
+        A_sim = 10000100;
+        B_sim = 10101000;
+        OP_Code_sim = 111;
+        #10
+
+        A_sim = 01000111;
+        B_sim = 10101011;
+        OP_Code_sim = 111;
+        #10
+
+
 
         $finish
 
