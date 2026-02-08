@@ -1,3 +1,7 @@
+// version 
+// last edited 2026-02-08 , 2:19 AM
+// last edited by Jayesh
+
 module Registers(
     input [7:0] Data_in,
     input [1:0] Write_address,
