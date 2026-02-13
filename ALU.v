@@ -2,6 +2,26 @@
 // last edited 2026-02-04 , 10:22 PM
 // last edited by Jayesh
 
+//Word = 32 bit.
+//we need 2 types of memory the main memory and the registers.
+//Processor contains ALU, Resiters, FSM, IR, PC.
+//the registers are used to say which values to operate on and the last word in register is for the address in the main memory for PC.
+//the main memory stores the instruction and sends it to IR nad it then goes to FSM
+
+//The negative numbers are stored in 2's complement form.
+//Carry flag is generated when the output is correct but there was a carry out of the MSB.
+//Overflow flag is generated when the output is incorrect.
+//For Example when we add 2 positive numbers and get a negative number or when we add 2 negative numbers and get a positive number.
+//
+//Opr = 0000 for NOP
+//Opr = 0001 for ADD
+//Opr = 0010 for SUB
+//Opr = 0011 for RY
+//Opr = 0100 for AND
+//Opr = 0101 for OR
+//Opr = 0110 for XOR
+//Opr = 0111 for NOT
+
 module ALU( 
     input [7:0] A, B,
     input [2:0] OP_Code,
